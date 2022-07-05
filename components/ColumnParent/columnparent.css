@@ -1,0 +1,11 @@
+.parent-field-list {
+  padding-left: 5px;
+}
+
+.expand {
+  display: block;
+}
+
+.collapse {
+  display: none;
+}
