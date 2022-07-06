@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ColumnChild from '../ColumnChild/ColumnChild';
 import './columnparent.css';
 import { FaAngleDown, FaAngleRight } from 'react-icons/fa';
+import Checkbox from '../Checkbox/Checkbox';
 
 export default function ColumnParent(props) {
   const fieldInfo = props.data;
@@ -28,14 +29,14 @@ export default function ColumnParent(props) {
     setChildrenState(stateOfChild);
   }, [checkAll]);
 
-  const handleOnChangeOfCheckParent = (e) => {
-    setCheckAll(e.target.checked);
+  const handleOnChangeOfCheckParent = (checked) => {
+    setCheckAll(checked);
     setCheckParent(!checkParent);
   };
 
-  const handleOnChangeOfChild = (e) => {
+  const handleOnChangeOfChild = (id, checked) => {
     let stateOfChild = { ...childrenState };
-    stateOfChild[e.target.id] = e.target.checked;
+    stateOfChild[id] = checked;
 
     setChildrenState(stateOfChild);
 
@@ -59,15 +60,23 @@ export default function ColumnParent(props) {
       <ul className="parent-field-list">
         <li key={fieldInfo.id}>
           {expandCollapseIcon}
-          <input
+          {/* <input
+            className="input-type"
             type="checkbox"
             id={fieldInfo.id}
             onChange={handleOnChangeOfCheckParent}
             checked={checkParent}
+          /> */}
+
+          <Checkbox
+            id={fieldInfo.id}
+            onChange={handleOnChangeOfCheckParent}
+            checked={checkParent}
           />
+
           <label htmlFor={fieldInfo.id}>{fieldInfo.field}</label>
 
-          <ul className={`${expand ? 'expand' : 'collapse'}`}>
+          <ul className={` ${expand ? 'expand' : 'collapse'}`}>
             {hasChild &&
               fieldInfo.values.map((field) => (
                 <ColumnChild

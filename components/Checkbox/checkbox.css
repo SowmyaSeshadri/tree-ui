@@ -1,0 +1,31 @@
+.checkbox-container {
+  display: inline-block;
+  padding: 0px 4px;
+  border-radius: 3px;
+  border: 1px solid black;
+
+  min-height: 16px;
+  min-width: 8px;
+
+  margin: 0px 5px;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+.check {
+  background-color: #2296f3;
+  color: white;
+
+  border: 1px solid #2296f3;
+}
+
+.partial-check {
+  background-color: #5f6364;
+  color: white;
+}

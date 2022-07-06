@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Checkbox from '../Checkbox/Checkbox';
 export default function ColumnChild(props) {
   const fieldInfo = props.data;
   const checkAll = props.checkAll;
@@ -8,19 +9,26 @@ export default function ColumnChild(props) {
     setCheckCurrent(checkAll);
   }, [checkAll]);
 
-  const handleOnCheckCurrent = (e) => {
+  const handleOnCheckCurrent = (id, checked) => {
     setCheckCurrent(!checkCurrent);
-    props.onChangeOfChild(e);
+    props.onChangeOfChild(id, checked);
   };
 
   return (
     <li key={fieldInfo.id}>
-      <input
+      {/* <input
         type="checkbox"
         id={fieldInfo.id}
         checked={checkCurrent}
         onChange={handleOnCheckCurrent}
+      /> */}
+
+      <Checkbox
+        id={fieldInfo.id}
+        onChange={handleOnCheckCurrent}
+        checked={checkCurrent}
       />
+
       <label htmlFor={fieldInfo.id}>{fieldInfo.field}</label>
     </li>
   );
