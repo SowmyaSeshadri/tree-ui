@@ -30,7 +30,6 @@ export default function ColumnParent(props) {
   }, [checkAll]);
 
   const handleOnChangeOfCheckParent = (id, checked) => {
-    console.log(checked, 'checked from parent handler ', checkAll);
     setCheckAll(checked);
     setCheckParent(!checkParent);
   };
@@ -62,13 +61,6 @@ export default function ColumnParent(props) {
       <ul className="parent-field-list">
         <li key={fieldInfo.id}>
           {expandCollapseIcon}
-          {/* <input
-            className="input-type"
-            type="checkbox"
-            id={fieldInfo.id}
-            onChange={handleOnChangeOfCheckParent}
-            checked={checkParent}
-          /> */}
 
           <Checkbox
             id={fieldInfo.id}

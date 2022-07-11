@@ -16,13 +16,6 @@ export default function ColumnChild(props) {
 
   return (
     <li key={fieldInfo.id}>
-      {/* <input
-        type="checkbox"
-        id={fieldInfo.id}
-        checked={checkCurrent}
-        onChange={handleOnCheckCurrent}
-      /> */}
-
       <Checkbox
         id={fieldInfo.id}
         onChange={handleOnCheckCurrent}
