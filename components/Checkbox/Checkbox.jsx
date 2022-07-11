@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FaCheck, FaMinus } from 'react-icons/fa';
+import { FaCheck } from 'react-icons/fa';
 import './checkbox.css';
 
 export default function Checkbox(props) {

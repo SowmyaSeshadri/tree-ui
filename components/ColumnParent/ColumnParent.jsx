@@ -35,7 +35,6 @@ export default function ColumnParent(props) {
   };
 
   const handleOnChangeOfChild = (id, checked) => {
-    console.log(checked);
     let stateOfChild = { ...childrenState };
     stateOfChild[id] = checked;
 
@@ -44,6 +43,13 @@ export default function ColumnParent(props) {
     let selectedFields = Object.values(stateOfChild).filter((f) => f);
     let updatedParentValue = selectedFields.length == 0 ? false : true;
     setCheckParent(updatedParentValue);
+
+    // To ensure that the checkAll state always holds the right value.
+    if (selectedFields.length == Object.keys(childrenState).length) {
+      setCheckAll(true);
+    } else if (selectedFields.length == 0) {
+      setCheckAll(false);
+    }
   };
 
   const handleExpandOrCollapse = () => {

@@ -43,7 +43,6 @@ export default function App() {
 
   return (
     <div>
-      <Checkbox />
       <Search searchTerm={searchTerm} onSearch={handleOnSearch} />
       {columnData.map((field, index) => (
         <ColumnParent key={index} data={field} />
