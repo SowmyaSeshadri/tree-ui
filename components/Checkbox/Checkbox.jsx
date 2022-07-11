@@ -14,7 +14,7 @@ export default function Checkbox(props) {
   const iconToDisplay = currentChecked ? <FaCheck size="10" /> : '';
 
   const handleOnCheck = (e) => {
-    props.onChange(e.target.id, !checked);
+    props.onChange(e.currentTarget.id, !checked);
   };
 
   return (

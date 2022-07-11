@@ -29,12 +29,14 @@ export default function ColumnParent(props) {
     setChildrenState(stateOfChild);
   }, [checkAll]);
 
-  const handleOnChangeOfCheckParent = (checked) => {
+  const handleOnChangeOfCheckParent = (id, checked) => {
+    console.log(checked, 'checked from parent handler ', checkAll);
     setCheckAll(checked);
     setCheckParent(!checkParent);
   };
 
   const handleOnChangeOfChild = (id, checked) => {
+    console.log(checked);
     let stateOfChild = { ...childrenState };
     stateOfChild[id] = checked;
 
