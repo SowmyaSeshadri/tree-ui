@@ -65,28 +65,29 @@ export default function ColumnParent(props) {
   return (
     <div className="parent-field">
       <ul className="parent-field-list">
-        <li key={fieldInfo.id}>
+        <li key={fieldInfo.id} className="m-t-10 flex">
           {expandCollapseIcon}
 
-          <Checkbox
-            id={fieldInfo.id}
-            onChange={handleOnChangeOfCheckParent}
-            checked={checkParent}
-          />
+          <div>
+            <Checkbox
+              id={fieldInfo.id}
+              onChange={handleOnChangeOfCheckParent}
+              checked={checkParent}
+              label={fieldInfo.field}
+            />
 
-          <label htmlFor={fieldInfo.id}>{fieldInfo.field}</label>
-
-          <ul className={` ${expand ? 'expand' : 'collapse'}`}>
-            {hasChild &&
-              fieldInfo.values.map((field) => (
-                <ColumnChild
-                  key={field.id}
-                  data={field}
-                  checkAll={checkAll}
-                  onChangeOfChild={handleOnChangeOfChild}
-                />
-              ))}
-          </ul>
+            <ul className={` ${expand ? 'expand' : 'collapse'}`}>
+              {hasChild &&
+                fieldInfo.values.map((field) => (
+                  <ColumnChild
+                    key={field.id}
+                    data={field}
+                    checkAll={checkAll}
+                    onChangeOfChild={handleOnChangeOfChild}
+                  />
+                ))}
+            </ul>
+          </div>
         </li>
       </ul>
     </div>

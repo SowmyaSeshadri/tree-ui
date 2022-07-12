@@ -15,14 +15,13 @@ export default function ColumnChild(props) {
   };
 
   return (
-    <li key={fieldInfo.id}>
+    <li key={fieldInfo.id} className="m-t-10 filter-list">
       <Checkbox
         id={fieldInfo.id}
         onChange={handleOnCheckCurrent}
         checked={checkCurrent}
+        label={fieldInfo.field}
       />
-
-      <label htmlFor={fieldInfo.id}>{fieldInfo.field}</label>
     </li>
   );
 }
