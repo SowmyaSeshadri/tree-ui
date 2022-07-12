@@ -3,19 +3,23 @@ import { FaCheck } from 'react-icons/fa';
 import './checkbox.css';
 
 export default function Checkbox(props) {
+  // Init values
   const checked = props.checked;
 
+  // States
   const [currentChecked, setCurrentChecked] = useState(checked);
 
+  // Use effects
   useEffect(() => {
     setCurrentChecked(checked);
   }, [checked]);
 
-  const iconToDisplay = currentChecked ? <FaCheck size="10" /> : '';
-
+  // Handlers
   const handleOnCheck = (e) => {
     props.onChange(e.currentTarget.id, !checked);
   };
+
+  const iconToDisplay = currentChecked ? <FaCheck size="10" /> : '';
 
   return (
     <div className="flex">

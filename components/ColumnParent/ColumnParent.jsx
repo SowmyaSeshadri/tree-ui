@@ -5,9 +5,9 @@ import { FaAngleDown, FaAngleRight } from 'react-icons/fa';
 import Checkbox from '../Checkbox/Checkbox';
 
 export default function ColumnParent(props) {
+  // Init values
   const fieldInfo = props.data;
   const hasChild = fieldInfo.values ? true : false;
-
   const initialStateOfChildren = () => {
     let childrenState = {};
     fieldInfo.values.map((value) => {
@@ -16,11 +16,13 @@ export default function ColumnParent(props) {
     return childrenState;
   };
 
+  // States
   const [checkParent, setCheckParent] = useState(false);
   const [checkAll, setCheckAll] = useState(false);
   const [childrenState, setChildrenState] = useState(initialStateOfChildren());
   const [expand, setExpand] = useState(true);
 
+  // Use effects
   useEffect(() => {
     let stateOfChild = {};
     Object.keys(childrenState).forEach((a) => {
@@ -29,11 +31,15 @@ export default function ColumnParent(props) {
     setChildrenState(stateOfChild);
   }, [checkAll]);
 
+  // Handlers
+
+  // When the checkbox of the parent filter is changed
   const handleOnChangeOfCheckParent = (id, checked) => {
     setCheckAll(checked);
     setCheckParent(!checkParent);
   };
 
+  // When the checkbox of the child filter is changed
   const handleOnChangeOfChild = (id, checked) => {
     let stateOfChild = { ...childrenState };
     stateOfChild[id] = checked;
@@ -52,6 +58,7 @@ export default function ColumnParent(props) {
     }
   };
 
+  // Handler for expand / collapse.
   const handleExpandOrCollapse = () => {
     setExpand(!expand);
   };

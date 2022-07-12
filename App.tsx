@@ -2,13 +2,24 @@ import React, { useEffect, useState } from 'react';
 import './style.css';
 import Search from './components/Search/Search.jsx';
 import ColumnParent from './components/ColumnParent/ColumnParent.jsx';
-import Checkbox from './components/Checkbox/Checkbox.jsx';
 import { COLUMN_FILTERS } from './data/MockData.js';
 
 export default function App() {
+  // States
   const [columnData, setColumnData] = useState(COLUMN_FILTERS);
   const [searchTerm, setSearchTerm] = useState('');
 
+  // Use effects
+  useEffect(() => {
+    if (searchTerm == '') {
+      setColumnData(COLUMN_FILTERS);
+    } else {
+      let filteredData = findFilteredData(searchTerm, COLUMN_FILTERS);
+      setColumnData(filteredData);
+    }
+  }, [searchTerm]);
+
+  // Handlers
   const handleOnSearch = (data) => {
     console.log('Search term: ', data);
     setSearchTerm(data);
@@ -31,15 +42,6 @@ export default function App() {
     });
     return filteredData;
   };
-
-  useEffect(() => {
-    if (searchTerm == '') {
-      setColumnData(COLUMN_FILTERS);
-    } else {
-      let filteredData = findFilteredData(searchTerm, COLUMN_FILTERS);
-      setColumnData(filteredData);
-    }
-  }, [searchTerm]);
 
   return (
     <div>
