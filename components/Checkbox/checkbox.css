@@ -1,10 +1,12 @@
 .checkbox-container {
-  display: inline-block;
-  padding: 0px 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   border-radius: 3px;
 
-  min-height: 22px;
-  min-width: 22px;
+  min-height: 21px;
+  min-width: 21px;
 
   margin: 0px 5px;
 }
@@ -23,4 +25,6 @@
 .partial-check {
   background-color: #5f6364;
   color: white;
+
+  border: 1px solid #5f6364;
 }

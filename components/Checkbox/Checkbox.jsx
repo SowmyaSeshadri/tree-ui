@@ -1,30 +1,48 @@
 import React, { useEffect, useState } from 'react';
-import { FaCheck } from 'react-icons/fa';
+import { FaCheck, FaMinus } from 'react-icons/fa';
 import './checkbox.css';
 
 export default function Checkbox(props) {
   // Init values
   const checked = props.checked;
+  const initialPartialCheck = props.partialCheck;
 
   // States
   const [currentChecked, setCurrentChecked] = useState(checked);
+  const [partialCheck, setPartialCheck] = useState(initialPartialCheck);
 
   // Use effects
   useEffect(() => {
     setCurrentChecked(checked);
   }, [checked]);
 
+  useEffect(() => {
+    setPartialCheck(initialPartialCheck);
+  }, [initialPartialCheck]);
+
   // Handlers
   const handleOnCheck = (e) => {
     props.onChange(e.currentTarget.id, !checked);
   };
 
-  const iconToDisplay = currentChecked ? <FaCheck size="10" /> : '';
+  const iconToDisplay = partialCheck ? (
+    <FaMinus size="10" />
+  ) : currentChecked ? (
+    <FaCheck size="10" />
+  ) : (
+    ''
+  );
+
+  const classForIcon = partialCheck
+    ? 'partial-check'
+    : currentChecked
+    ? 'check'
+    : 'uncheck';
 
   return (
     <div className="flex">
       <div
-        className={`checkbox-container ${currentChecked ? 'check' : 'uncheck'}`}
+        className={`checkbox-container ${classForIcon}`}
         onClick={handleOnCheck}
         id={props.id}
       >

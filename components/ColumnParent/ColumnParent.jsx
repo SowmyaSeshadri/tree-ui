@@ -20,6 +20,7 @@ export default function ColumnParent(props) {
   const [checkParent, setCheckParent] = useState(false);
   const [checkAll, setCheckAll] = useState(false);
   const [childrenState, setChildrenState] = useState(initialStateOfChildren());
+  const [checkParentPartially, setCheckParentPartially] = useState(false);
   const [expand, setExpand] = useState(true);
 
   // Use effects
@@ -35,6 +36,7 @@ export default function ColumnParent(props) {
 
   // When the checkbox of the parent filter is changed
   const handleOnChangeOfCheckParent = (id, checked) => {
+    setCheckParentPartially(false);
     setCheckAll(checked);
     setCheckParent(checked);
   };
@@ -46,9 +48,18 @@ export default function ColumnParent(props) {
 
     setChildrenState(stateOfChild);
 
+    // For setting the partial / selected icon for the parent field.
     let selectedFields = Object.values(stateOfChild).filter((f) => f);
-    let updatedParentValue = selectedFields.length == 0 ? false : true;
-    setCheckParent(updatedParentValue);
+    if (
+      selectedFields.length != Object.values(stateOfChild).length &&
+      selectedFields.length != 0
+    ) {
+      setCheckParentPartially(true);
+    } else {
+      let updatedParentValue = selectedFields.length == 0 ? false : true;
+      setCheckParentPartially(false);
+      setCheckParent(updatedParentValue);
+    }
 
     // To ensure that the checkAll state always holds the right value.
     if (selectedFields.length == Object.keys(childrenState).length) {
@@ -81,6 +92,7 @@ export default function ColumnParent(props) {
               onChange={handleOnChangeOfCheckParent}
               checked={checkParent}
               label={fieldInfo.field}
+              partialCheck={checkParentPartially}
             />
 
             <ul className={` ${expand ? 'expand' : 'collapse'}`}>
