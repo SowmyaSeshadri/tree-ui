@@ -40,12 +40,8 @@ export default function Checkbox(props) {
     : 'uncheck';
 
   return (
-    <div className="flex">
-      <div
-        className={`checkbox-container ${classForIcon}`}
-        onClick={handleOnCheck}
-        id={props.id}
-      >
+    <div className="flex" onClick={handleOnCheck} id={props.id}>
+      <div className={`checkbox-container ${classForIcon}`}>
         {iconToDisplay}
       </div>
       <label htmlFor={props.id}>{props.label}</label>
