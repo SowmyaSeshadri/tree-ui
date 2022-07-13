@@ -40,7 +40,8 @@ export default function Checkbox(props) {
     : 'uncheck';
 
   return (
-    <div className="flex" onClick={handleOnCheck} id={props.id}>
+    // TODO: This should be an input type checkbox field for accessibility concerns.
+    <div className="inline-flex" onClick={handleOnCheck} id={props.id}>
       <div className={`checkbox-container ${classForIcon}`}>
         {iconToDisplay}
       </div>

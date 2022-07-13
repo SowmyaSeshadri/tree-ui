@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import ColumnChild from '../ColumnChild/ColumnChild';
 import './columnparent.css';
-import { FaAngleDown, FaAngleRight } from 'react-icons/fa';
+import { FaAngleDown, FaAngleRight, FaTrashAlt } from 'react-icons/fa';
+import { BsXCircle } from 'react-icons/bs';
 import Checkbox from '../Checkbox/Checkbox';
 
 export default function ColumnParent(props) {
@@ -83,17 +84,23 @@ export default function ColumnParent(props) {
   return (
     <div className="parent-field">
       <ul className="parent-field-list">
-        <li key={fieldInfo.id} className="m-t-10 flex">
+        <li key={fieldInfo.id} className="m-t-10 inline-flex">
           {expandCollapseIcon}
 
           <div>
-            <Checkbox
-              id={fieldInfo.id}
-              onChange={handleOnChangeOfCheckParent}
-              checked={checkParent}
-              label={fieldInfo.field}
-              partialCheck={checkParentPartially}
-            />
+            <div className="filter-list">
+              <Checkbox
+                id={fieldInfo.id}
+                onChange={handleOnChangeOfCheckParent}
+                checked={checkParent}
+                label={fieldInfo.field}
+                partialCheck={checkParentPartially}
+              />
+
+              <span className="delete-icon flex">
+                <BsXCircle onClick={() => props.onDelete(fieldInfo.id)} />
+              </span>
+            </div>
 
             <ul className={` ${expand ? 'expand' : 'collapse'}`}>
               {hasChild &&
@@ -103,6 +110,7 @@ export default function ColumnParent(props) {
                     data={field}
                     checkAll={checkAll}
                     onChangeOfChild={handleOnChangeOfChild}
+                    onDelete={props.onDelete}
                   />
                 ))}
             </ul>

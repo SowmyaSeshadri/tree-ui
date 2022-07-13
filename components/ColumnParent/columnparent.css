@@ -9,3 +9,7 @@
 .collapse {
   display: none;
 }
+
+.delete-icon {
+  margin-left: 10px;
+}

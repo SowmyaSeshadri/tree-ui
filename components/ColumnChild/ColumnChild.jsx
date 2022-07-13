@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Checkbox from '../Checkbox/Checkbox';
+import { BsXCircle } from 'react-icons/bs';
+
 export default function ColumnChild(props) {
   // Init values
   const fieldInfo = props.data;
@@ -26,6 +28,10 @@ export default function ColumnChild(props) {
         onChange={handleOnCheckCurrent}
         checked={checkCurrent}
         label={fieldInfo.field}
+      />
+      <BsXCircle
+        className="delete-icon"
+        onClick={() => props.onDelete(fieldInfo.id)}
       />
     </li>
   );

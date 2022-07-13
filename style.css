@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
 h1,
 p {
@@ -15,7 +15,7 @@ li {
 }
 
 body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 16px;
 }
 
@@ -30,4 +30,18 @@ body {
 
 .flex {
   display: flex;
+}
+
+.refresh {
+  cursor: pointer;
+  position: relative;
+  top: 4px;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.inline-flex {
+  display: inline-flex;
 }
