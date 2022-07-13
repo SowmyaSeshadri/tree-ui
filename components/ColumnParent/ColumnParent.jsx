@@ -36,7 +36,7 @@ export default function ColumnParent(props) {
   // When the checkbox of the parent filter is changed
   const handleOnChangeOfCheckParent = (id, checked) => {
     setCheckAll(checked);
-    setCheckParent(!checkParent);
+    setCheckParent(checked);
   };
 
   // When the checkbox of the child filter is changed
