@@ -17,7 +17,7 @@ export default function App() {
     if (searchTerm == '') {
       setColumnData(columnFilters);
     } else {
-      let filteredData = findFilteredData(searchTerm, columnFilters);
+      let filteredData = findFilteredData(searchTerm, columnData);
       setColumnData(filteredData);
     }
   }, [searchTerm]);
