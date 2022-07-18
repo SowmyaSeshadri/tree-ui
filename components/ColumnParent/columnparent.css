@@ -10,6 +10,6 @@
   display: none;
 }
 
-.delete-icon {
-  margin-left: 10px;
+.action-icon {
+  margin: 0 5px;
 }

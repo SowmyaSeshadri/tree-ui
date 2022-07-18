@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import ColumnChild from '../ColumnChild/ColumnChild';
 import './columnparent.css';
-import { FaAngleDown, FaAngleRight, FaTrashAlt } from 'react-icons/fa';
+import { FaAngleDown, FaAngleRight } from 'react-icons/fa';
 import { BsXCircle, BsFillPencilFill, BsCheck2 } from 'react-icons/bs';
 import Checkbox from '../Checkbox/Checkbox';
 import InputTextField from '../InputTextField/InputTextField';
@@ -25,6 +25,7 @@ export default function ColumnParent(props) {
   const [checkParentPartially, setCheckParentPartially] = useState(false);
   const [expand, setExpand] = useState(true);
   const [editMode, setEditMode] = useState(false);
+  const [fieldName, setFieldName] = useState(fieldInfo.field);
 
   // Use effects
   useEffect(() => {
@@ -77,7 +78,10 @@ export default function ColumnParent(props) {
     setExpand(!expand);
   };
 
-  const handleEditField = (id) => {};
+  const handleEditField = (id) => {
+    props.onEdit(id, fieldName);
+    setEditMode(!editMode);
+  };
 
   const expandCollapseIcon = expand ? (
     <FaAngleDown onClick={handleExpandOrCollapse} />
@@ -87,7 +91,10 @@ export default function ColumnParent(props) {
 
   const viewOrEditField = editMode ? (
     <div>
-      <InputTextField initialValue={fieldInfo.field} />
+      <InputTextField
+        value={fieldName}
+        onChange={(value) => setFieldName(value)}
+      />
       <BsCheck2 onClick={() => handleEditField(fieldInfo.id)} />
     </div>
   ) : (
@@ -95,22 +102,21 @@ export default function ColumnParent(props) {
       id={fieldInfo.id}
       onChange={handleOnChangeOfCheckParent}
       checked={checkParent}
-      label={fieldInfo.field}
+      label={fieldName}
       partialCheck={checkParentPartially}
     />
   );
 
-  const editIcon = !editMode ? (
-    <span className="delete-icon flex">
-      <BsFillPencilFill onClick={() => setEditMode(true)} />
-    </span>
-  ) : (
-    ''
-  );
-
-  const deleteIcon = !editMode ? (
-    <span className="delete-icon flex">
-      <BsXCircle onClick={() => props.onDelete(fieldInfo.id)} />
+  const actionIcons = !editMode ? (
+    <span className="flex">
+      <BsXCircle
+        className="action-icon"
+        onClick={() => props.onDelete(fieldInfo.id)}
+      />
+      <BsFillPencilFill
+        className="action-icon"
+        onClick={() => setEditMode(true)}
+      />
     </span>
   ) : (
     ''
@@ -125,8 +131,7 @@ export default function ColumnParent(props) {
           <div>
             <div className="filter-list">
               {viewOrEditField}
-              {deleteIcon}
-              {editIcon}
+              {actionIcons}
             </div>
 
             <ul className={` ${expand ? 'expand' : 'collapse'}`}>
@@ -138,6 +143,7 @@ export default function ColumnParent(props) {
                     checkAll={checkAll}
                     onChangeOfChild={handleOnChangeOfChild}
                     onDelete={props.onDelete}
+                    onEdit={props.onEdit}
                   />
                 ))}
             </ul>

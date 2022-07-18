@@ -32,6 +32,27 @@ export default function App() {
     setColumnData(filteredData);
   };
 
+  const handleEditData = (id, value) => {
+    let updatedField = false;
+    let dataToEdit = [...columnData];
+    dataToEdit.map((data) => {
+      if (data.id == id) {
+        data.field = value;
+        updatedField = true;
+      }
+
+      if (data.values.length > 0 && !updatedField) {
+        data.values.map((d) => {
+          if (d.id == id) {
+            d.field = value;
+            updatedField = true;
+          }
+        });
+      }
+    });
+    setColumnData(dataToEdit);
+  };
+
   const removeData = (id, data) => {
     let filteredData = [];
     filteredData = data.filter((d) => d.id != id);
@@ -77,7 +98,12 @@ export default function App() {
       </span>
 
       {columnData.map((field, index) => (
-        <ColumnParent key={index} data={field} onDelete={handleDeleteFilter} />
+        <ColumnParent
+          key={index}
+          data={field}
+          onDelete={handleDeleteFilter}
+          onEdit={handleEditData}
+        />
       ))}
     </div>
   );
